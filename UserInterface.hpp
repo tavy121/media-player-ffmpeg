@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdexcept>
+
 #include "IUserInterface.hpp"
 
 
@@ -30,9 +32,6 @@ class UserInterface : public IUserInterface
 
    bool getQuit() const override;
    bool getPlay() const override;
-
-   void startServer();
-   void startClient();
 
  private:
    bool mQuit{false};

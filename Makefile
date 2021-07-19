@@ -10,6 +10,14 @@ obj = $(src:.cpp=.o)
 dep = $(obj:.o=.d)
 target = player
 
+# Q = $(if $(filter 1,$V),,@)
+
+# build-image: ; $(info $(M) building docker image) @ ## Run bootstrap for local db
+# 	$Q docker build -t media_player .
+
+# run-image: $(build-image)
+# 	$Q docker run -it --privileged -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY -e PULSE_SERVER=unix:${XDG_RUNTIME_DIR}/pulse/native -v ${XDG_RUNTIME_DIR}/pulse/native:${XDG_RUNTIME_DIR}/pulse/native  --device /dev/dri --device /dev/input -v ~/.config/pulse/cookie:/root/.config/pulse/cookie --device /dev/snd --rm --name my-running-app media_player
+
 all: $(target)
 
 $(target): $(obj)
@@ -21,7 +29,7 @@ $(target): $(obj)
 	@$(CXX) $(CXXFLAGS) $< -MM -MT $(@:.d=.o) >$@
 
 test: $(target)
-	./$(target) test1.mp4
+	./$(target) test.mp4
 
 .PHONY: clean
 clean:

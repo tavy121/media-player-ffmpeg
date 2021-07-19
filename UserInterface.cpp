@@ -1,5 +1,4 @@
 #include "UserInterface.hpp"
-#include "Server.hpp"
 #include "Client.hpp"
 #include <stdexcept>
 
@@ -144,20 +143,16 @@ void UserInterface::input()
 				 (mouseY >= (int)(windowHeight * 90 / 100) && mouseY <= (int)(windowHeight * 90 / 100) + serverButtonRect.h))
 			{
 				printf("Server : I am at position X=%d Y=%d and playButtonX=%d, playPauseButtonY=%d and mPlay=%d\n",mouseX,mouseY, serverButtonX, serverButtonY, mPlay );
-				this->startServer();
 			}
 			else if ((mouseX >= (int)(windowWidth * 93 / 100) && mouseX <= (int)(windowWidth * 93 / 100) + clientButtonRect.w) &&
 				 (mouseY >= (int)(windowHeight * 90 / 100) && mouseY <= (int)(windowHeight * 90 / 100) + clientButtonRect.h))
 			{
 				printf("Client : I am at position X=%d Y=%d and playButtonX=%d, playPauseButtonY=%d and mPlay=%d\n",mouseX,mouseY, clientButtonX, clientButtonY, mPlay );
-				this->startClient();
 			}
 			break;
 		}
 		case SDL_MOUSEMOTION:
 		{
-			//printf("I am at position X=%d Y=%d and playButtonX=%d, playPauseButtonY=%d\n",mouseX,mouseY, playPauseButtonX,playPauseButtonY );
-
 			if ((mouseX >= (int)(windowWidth * 2 / 100) && mouseX <= (int)(windowWidth * 2 / 100) + playButtonRect.w) &&
 				 (mouseY >= (int)(windowHeight * 90 / 100) && mouseY <= (int)(windowHeight * 90 / 100) + playButtonRect.h))
 			{
@@ -239,21 +234,4 @@ bool UserInterface::getQuit() const
 bool UserInterface::getPlay() const
 {
 	return mPlay;
-}
-
-void UserInterface::startServer()
-{
-	Server server;
-	printf("\nThe current port number is %d", currentPortNumber);
-	server.initializeServer(currentPortNumber, fileName);
-	currentPortNumber++;
-	server.manageRuntime();
-}
-
-void UserInterface::startClient()
-{
-	Client client;
-   client.initializeClient("127.0.0.1", currentPortNumberClient);
-	currentPortNumberClient++;
-   client.manageClient();
 }
