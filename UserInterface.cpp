@@ -187,10 +187,6 @@ void UserInterface::input()
 	}
 }
 
-void UserInterface::handlePlayPauseButton()
-{
-}
-
 void UserInterface::drawPlayButton()
 {
 	if (true == mPlay)
@@ -203,17 +199,6 @@ void UserInterface::drawPlayButton()
 	}
 }
 
-void UserInterface::drawPauseButton()
-{
-}
-
-void UserInterface::drawTimelineBar()
-{
-}
-
-void UserInterface::drawOnAirSign()
-{
-}
 
 void UserInterface::drawServerButton()
 {

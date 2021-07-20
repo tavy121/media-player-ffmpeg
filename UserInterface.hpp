@@ -21,11 +21,7 @@ class UserInterface : public IUserInterface
    void refreshSound(const uint8_t *soundPlane, const size_t &audioLinesize) override;
 
    void input() override;
-   void handlePlayPauseButton() override;
    void drawPlayButton() override;
-   void drawPauseButton() override;
-   void drawTimelineBar() override;
-   void drawOnAirSign() override;
 
    void drawServerButton() override;
    void drawClientButton() override;

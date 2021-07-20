@@ -52,7 +52,6 @@ ActualPlayer::ActualPlayer(const std::string &fileName)
                                             mVideoDecoder->getHeight(),
                                             mVideoDecoder->getPixelFormat(),
                                             AV_PIX_FMT_YUV420P);
-   //printf("Video width = %d, height= %d", mVideoDecoder->getWidth(),  mVideoDecoder->getHeight());
 
    // mUserInterface = std::make_unique<UserInterface>(mVideoDecoder->getWidth(),
    //                                                  mVideoDecoder->getHeight());
@@ -82,8 +81,6 @@ ActualPlayer::~ActualPlayer()
 
 int ActualPlayer::findAudioCodec()
 {
-   //printf("ActualPlayer::%s start\n", __func__);
-
    int res = -1;
    pAudioCodec = avcodec_find_decoder(pCodecAudioParameters->codec_id);
 
@@ -117,13 +114,11 @@ int ActualPlayer::findAudioCodec()
       exit(-1);
    }
 
-   //printf("ActualPlayer::%s end\n", __func__);
    return 1;
 }
 
 int ActualPlayer::allocMemory()
 {
-   //printf("ActualPlayer::%s start\n", __func__);
    swrCtx = swr_alloc();
    if (swrCtx == nullptr)
    {
@@ -169,23 +164,19 @@ int ActualPlayer::allocMemory()
    initAudioPacket(&gAudioQueue);
    SDL_PauseAudio(0);
 
-   //printf("ActualPlayer::%s end\n", __func__);
    return 1;
 }
 
 void ActualPlayer::initAudioPacket(AudioPacket *audioQueue)
 {
-   //printf("ActualPlayer::%s start\n", __func__);
    audioQueue->last = nullptr;
    audioQueue->first = nullptr;
    audioQueue->mutex = SDL_CreateMutex();
    audioQueue->cond = SDL_CreateCond();
-   //printf("ActualPlayer::%s end\n", __func__);
 }
 
 int ActualPlayer::putAudioPacket(AudioPacket *audioQueue, AVPacket *pkt)
 {
-   //printf("ActualPlayer::%s start\n", __func__);
    AVPacketList *pktl;
    AVPacket *newPkt;
    newPkt = (AVPacket *)av_mallocz_array(1, sizeof(AVPacket));
@@ -218,13 +209,11 @@ int ActualPlayer::putAudioPacket(AudioPacket *audioQueue, AVPacket *pkt)
    SDL_CondSignal(audioQueue->cond);
    SDL_UnlockMutex(audioQueue->mutex);
 
-   //printf("ActualPlayer::%s end\n", __func__);
    return 0;
 }
 
 int ActualPlayer::getAudioPacket(AudioPacket *audioQueue, AVPacket *pkt, int block)
 {
-   //printf("ActualPlayer::%s start\n", __func__);
    AVPacketList *pktl;
    int ret;
 
@@ -260,13 +249,11 @@ int ActualPlayer::getAudioPacket(AudioPacket *audioQueue, AVPacket *pkt, int blo
 
    SDL_UnlockMutex(audioQueue->mutex);
 
-   //printf("ActualPlayer::%s end\n", __func__);
    return ret;
 }
 
 int audio_decode_frame(AVCodecContext *aCodecCtx, uint8_t *audio_buf, int buf_size)
 {
-   //printf("ActualPlayer::%s start\n", __func__);
    static AVPacket pkt;
    static uint8_t *audio_pkt_data = nullptr;
    static int audio_pkt_size = 0;
@@ -359,7 +346,6 @@ int audio_decode_frame(AVCodecContext *aCodecCtx, uint8_t *audio_buf, int buf_si
       audio_pkt_data = pkt.data;
       audio_pkt_size = pkt.size;
    }
-   //printf("ActualPlayer::%s end\n", __func__);
 }
 
 void audio_callback(void *userdata, Uint8 *stream, int len)
@@ -398,7 +384,6 @@ void audio_callback(void *userdata, Uint8 *stream, int len)
 
       SDL_MixAudio(stream, audio_buff + audio_buf_index, len, SDL_MIX_MAXVOLUME);
 
-      //memcpy(stream, (uint8_t*)(audio_buff + audio_buf_index), audio_buf_size);
       len -= len1;
       stream += len1;
       audio_buf_index += len1;
@@ -424,10 +409,6 @@ void ActualPlayer::operator()()
    }
 }
 
-void ActualPlayer::memsetAudioPacket(AudioPacket *audioQueue)
-{
-}
-
 void ActualPlayer::demultiplex()
 {
    try
@@ -449,7 +430,6 @@ void ActualPlayer::demultiplex()
 
          if (packet->stream_index == mVideoDecoder->getVideoStreamIndex())
          {
-            //printf("I ve entered in video stream index\n");
             if (!mVideoPacketQueue->push(std::move(packet)))
             {
                break;

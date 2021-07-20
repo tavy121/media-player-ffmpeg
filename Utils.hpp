@@ -42,5 +42,4 @@ private:
 	constexpr static double D_{0.0};
 };
 
-
 #endif //__UTILS_V0__

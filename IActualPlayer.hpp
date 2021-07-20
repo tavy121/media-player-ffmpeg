@@ -20,13 +20,10 @@ typedef struct _AudioPacket
 class IActualPlayer
 {
 public:
-
    virtual void demultiplex() = 0;
    virtual void decodeMedia() = 0;
    virtual void playVideo() = 0;
    virtual void operator()() = 0;
-
-   virtual void memsetAudioPacket(AudioPacket *audioPacket) = 0;
 
    virtual void initAudioPacket(AudioPacket *) = 0;
 
@@ -35,11 +32,4 @@ public:
    virtual int allocMemory() = 0;
 
    static int getAudioPacket(AudioPacket *audioQueue, AVPacket *packet, int block);
-
-   //Client
-   // void initializeClient(int argc, char *argv[]);
-   // void runClient();
-   // void receiveMediaData(int socketFd, struct sockaddr_in serverAddress, socklen_t serverLen);
-   // void consumeVideoData();
-
 };

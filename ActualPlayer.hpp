@@ -21,8 +21,6 @@ public:
    void playVideo() override;
    void operator()() override;
 
-   void memsetAudioPacket(AudioPacket *audioQueue) override;
-
    void initAudioPacket(AudioPacket *audioQueue) override;
 
    int putAudioPacket(AudioPacket *audioQueue, AVPacket *) override;
@@ -51,5 +49,4 @@ private:
    AVCodecContext *pCodecAudioCtx = nullptr;
    AVCodec *pAudioCodec = nullptr;
    int audioStream;
-
 };

@@ -15,7 +15,6 @@ extern "C" {
 class IDecoder
 {
 public:
-
     virtual AVCodecParameters* getVideoCodecParams() const = 0;
     virtual AVCodecParameters* getAudioCodecParams() const = 0;
 	virtual int getVideoStreamIndex() const = 0;
