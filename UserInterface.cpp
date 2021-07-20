@@ -1,5 +1,4 @@
 #include "UserInterface.hpp"
-#include "Client.hpp"
 #include <stdexcept>
 
 #include "SDL2/SDL_image.h"
@@ -44,18 +43,18 @@ UserInterface::UserInterface(const std::string fileName, const unsigned width, c
 
 	SDL_GetWindowSize(mWindowSdl.get(), &windowWidth, &windowHeight);
 
-	arrowCursorSurface = IMG_Load("Butoane/ArrowCursor.png");
+	arrowCursorSurface = IMG_Load("Buttons/ArrowCursor.png");
 	arrowCursor = SDL_CreateColorCursor(arrowCursorSurface, 0, 0);
 
-	handCursorSurface = IMG_Load("Butoane/HandCursor.png");
+	handCursorSurface = IMG_Load("Buttons/HandCursor.png");
 	handCursor = SDL_CreateColorCursor(handCursorSurface, 12, 0);
 
 	SDL_SetCursor(arrowCursor);
 
-	playButtonTexture = SDL_CreateTextureFromSurface(mRendererSdl.get(), IMG_Load("Butoane/PlayButton1.png"));
-	pauseButtonTexture = SDL_CreateTextureFromSurface(mRendererSdl.get(), IMG_Load("Butoane/PauseButton.png"));
-	serverButtonTexture = SDL_CreateTextureFromSurface(mRendererSdl.get(), IMG_Load("Butoane/ServerButton.png"));
-	clientButtonTexture = SDL_CreateTextureFromSurface(mRendererSdl.get(), IMG_Load("Butoane/ClientButton.png"));
+	playButtonTexture = SDL_CreateTextureFromSurface(mRendererSdl.get(), IMG_Load("Buttons/PlayButton1.png"));
+	pauseButtonTexture = SDL_CreateTextureFromSurface(mRendererSdl.get(), IMG_Load("Buttons/PauseButton.png"));
+	serverButtonTexture = SDL_CreateTextureFromSurface(mRendererSdl.get(), IMG_Load("Buttons/ServerButton.png"));
+	clientButtonTexture = SDL_CreateTextureFromSurface(mRendererSdl.get(), IMG_Load("Buttons/ClientButton.png"));
 
 	playButtonRect.x = (int)(windowWidth * 2 / 100);
 	playButtonRect.y = (int)(windowHeight * 90 / 100);

@@ -20,8 +20,6 @@ RUN apt-get update && apt-get install -y \
 
 COPY . /usr/src/media_player
 WORKDIR /usr/src/media_player
-RUN make all
+RUN make build
 
 USER 1000
-
-# ENTRYPOINT [ "./player" "test.mp4"]
