@@ -34,8 +34,6 @@ extern "C"
 #include <libavutil/mem.h>
 }
 
-#define INBUF_SIZE 4 * 1024
-
 #define SDL_AUDIO_BUFFER_SIZE 1024;
 
 const size_t ActualPlayer::mQueueSize{2};

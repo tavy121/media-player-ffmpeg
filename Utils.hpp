@@ -15,6 +15,7 @@ class Converter
 public:
     Converter(size_t width, size_t height, AVPixelFormat input_pixel_format, AVPixelFormat output_pixel_format);
     void operator()(AVFrame* src, AVFrame* dst);
+
 private:
     SwsContext* mConversionContext;
     size_t width;
@@ -22,7 +23,14 @@ private:
 };
 
 class Timer {
+public:
+	Timer();
+	void wait(int64_t period);
+	void update();
+
 private:
+	int64_t adjust() const;
+
 	std::chrono::time_point<std::chrono::high_resolution_clock> target_time_;
 
 	int64_t proportional_{};
@@ -32,14 +40,6 @@ private:
 	constexpr static double P_{0.0};
 	constexpr static double I_{-1.0};
 	constexpr static double D_{0.0};
-
-public:
-	Timer();
-	void wait(int64_t period);
-	void update();
-
-private:
-	int64_t adjust() const;
 };
 
 
